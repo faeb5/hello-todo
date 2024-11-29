@@ -28,7 +28,7 @@ public class TodoRest {
   }
 
   @Path("update")
-  @POST
+  @PUT
   public Response updateTodo(Todo todo) {
     return Response.ok(todoService.updateTodo(todo)).build();
   }
