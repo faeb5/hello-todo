@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.time.LocalDate;
 import java.util.List;
 
 @Path("todo")
@@ -43,5 +44,14 @@ public class TodoRest {
   @GET
   public List<Todo> getAllTodos() {
     return todoService.findAllTodos();
+  }
+
+  @Path("status")
+  @POST
+  public Response completeTodo(@QueryParam(value = "id") Long id) {
+    Todo t = todoService.findTodoById(id);
+    t.setCompleted(true);
+    t.setDateCompleted(LocalDate.now());
+    return Response.ok(todoService.updateTodo(t)).build();
   }
 }
