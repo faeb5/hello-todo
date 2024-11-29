@@ -1,6 +1,11 @@
 package com.example.entity;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity
@@ -9,11 +14,19 @@ public class Todo {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
+  @NotEmpty(message = "Task must not be empty")
+  @Size(min = 10, message = "Task must be at least 10 characters long")
   private String task;
+
+  @NotNull(message = "Due date must be set")
+  @FutureOrPresent(message = "Due date must not be in the past")
+  @JsonbDateFormat(value = "yyyy-MM-dd")
   private LocalDate dueDate;
-  private boolean isCompleted;
+
   private LocalDate dateCompleted;
   private LocalDate dateCreated;
+
+  private boolean isCompleted;
 
   @PrePersist
   private void init() {
