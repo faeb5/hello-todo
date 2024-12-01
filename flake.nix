@@ -15,7 +15,6 @@
       mkShellNoCC {
         buildInputs = with pkgs; [jdk8 maven];
         packages = with pkgs; [jdt-language-server lombok google-java-format insomnia];
-        JDTLS_HOME = "${jdt-language-server}/share/java/jdtls";
         LOMBOK_HOME = "${lombok}/share/java";
         shellHook = ''echo "Welcome to the generic Java development environment"'';
       };
