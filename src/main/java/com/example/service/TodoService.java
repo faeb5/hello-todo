@@ -10,22 +10,22 @@ import java.util.List;
 @Transactional
 public class TodoService {
 
-  @PersistenceContext private EntityManager entityManager;
+    @PersistenceContext private EntityManager entityManager;
 
-  public Todo createTodo(Todo todo) {
-    entityManager.persist(todo);
-    return todo;
-  }
+    public Todo createTodo(Todo todo) {
+        entityManager.persist(todo);
+        return todo;
+    }
 
-  public Todo updateTodo(Todo todo) {
-    return entityManager.merge(todo);
-  }
+    public Todo updateTodo(Todo todo) {
+        return entityManager.merge(todo);
+    }
 
-  public Todo findTodoById(Long id) {
-    return entityManager.find(Todo.class, id);
-  }
+    public Todo findTodoById(Long id) {
+        return entityManager.find(Todo.class, id);
+    }
 
-  public List<Todo> findAllTodos() {
-    return entityManager.createQuery("SELECT t FROM Todo t", Todo.class).getResultList();
-  }
+    public List<Todo> findAllTodos() {
+        return entityManager.createQuery("SELECT t FROM Todo t", Todo.class).getResultList();
+    }
 }
